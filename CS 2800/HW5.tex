@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[margin=1in]{geometry}
+
+\title{\textbf{CS 2800 HW 4}}
+\author{Tanish Tyagi \\ Collaborators: Timothy Li, Anthony Song, Eric Zhou}
+\date{October 4, 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+
+Let's say $X$, $Y$, and $Z$ are all the set of real numbers ($\mathbb{R}$).
+
+\subsection{Problem 1a}
+
+$f_1(x) = x$ \\
+$f_2(x) = -x$ \\
+$g(x) = x^2$ \\
+
+With these three functions, $(g \circ f_1)(x) = g(f_1(x)) = (x)^2$ and $(g \circ f_2)(x) = g(f_2(x)) = (-x)^2 = (x)^2$. We can see from this that $(g \circ f_1)(x) = (g \circ f_2)(x)$. Yet, we know that $f_1 \neq f_2$ as $x \neq -x$. For example, $f_1(-1) = -1$, while $f_2(-1) = -(-1) = 1$. Therefore, this implication is false.
+
+\subsection{Problem 1b}
+
+Recall that contrapositive definition of injectivity states that a function is injective if $\forall d_1, d_2 \in D. g(d_1) = g(d_2) \Rightarrow d_1 = d_2$. Since $g$ is injective, this means we can take $d_1 = f_1(x)$ and $d_2 = f_2(x)$ from the implication in part a. By the contrapositive definition of injectivity, we then obtain $g(f_1(x)) = g(f_2(x)) \Rightarrow f_1(x) = f_2(x)$. With $g$ being injective, this implication is true, meaning that for all $x \in X, f_1(x) = f_2(x)$, then $f_1 = f_2$.
+
+\subsection{Problem 1c} 
+
+$g_1(x) = |x|$ \\
+$g_2(x) = x$ \\
+$f(x) = x^2$ \\
+
+With these three functions, $(g_1 \circ f)(x) = g_1(f(x)) = |x^2|$, which is equivalent to $x^2$ as $x^2$ is always positive. $(g_2 \circ f)(x) = g_2(f(x)) = x^2$. We can see from this that  $(g \circ f_1)(x) = (g \circ f_2)(x)$. Yet, $g_1 \neq g_2$, as $|x| \neq x$. For example, $g_1(-1) = |-1| = 1$, while $g_2(-1) = -1$. Therefore, this implication is false.
+
+\subsection{Problem 1d}
+
+Let's use the contrapositive defintion of an implication, which states $\neg Q \Rightarrow \neg P$. In this example, $\neg Q$ means that $g_1 \neq g_2$. If we assume $\neg Q$ to be true, this means that $g_1(x) \neq g_2(x)$. We know that $g_1$ and $g_2$ take input from a function $f$ in the other side ($\neg P$) of this implication. Since $f$ is surjective, this means that for an arbitrary $y \in Y$, there is some element $x \in X$ such that $f(x) = y$. We can substitute $y = f(x)$ into $\neg Q$ to obtain for all $y \in Y, g_1(y) \neq g_2(y)$, where $y = f(x)$. By directly incorporating $f(x)$ into the equality statement, we can rewrite this as for all $x \in X, g_1(f(x)) \neq g_2(f(x))$, which proves $\neg P$. Since the implication $\neg Q \Rightarrow \neg P$ has now been shown to be true, this means that we can say the implication $P \Rightarrow Q$ (the original statement) is true as well.
+
+\section{Problem 2}
+
+This proof has two sub-proofs:
+
+\begin{enumerate}
+
+\item Prove $f$ is surjective $\Rightarrow$ $T \subseteq S$. 
+
+If we assume that $f$ is surjective, this means that for every $t \in \mathcal{P}(T)$, there is some $s \in \mathcal{P}(S)$ such that $f(s) = t$. Since the power set is the set of all subsets, we can say that for any $t \subseteq T$, there is some $s \in S$ such that $f(t) = s$. Let's look at the corner case where $t = \emptyset$, which we know always has to be in the power set. By the definition of set difference, we know that $f(A) = \emptyset$ when $A = T$. This means that for $\mathcal{P}(T)$ to contain $\emptyset$, $A$ must contain $T$. Recall that the problem states $A \subseteq S$, meaning that $T$ has to be a member of $S$ as well, since it is mandatory for all power sets to contain the $\emptyset$. Therefore, we have proven $T \subseteq S$, proving this implication true.
+
+\item Prove $T \subseteq S \Rightarrow f$ is surjective. 
+
+If we assume $T \subseteq S$, this means that $T \setminus A \subseteq S$, as $T \setminus A \subseteq T$ by the definition of set difference. We also know that $\mathcal{P}(T) \subseteq \mathcal{P}(S)$ if $T \subseteq S$. We want to show that for any $t \in \mathcal{P}(T)$, there is some $s \in \mathcal{P}(S)$ such that $f(s) = t$. As in sub-proof 1, this is equivalent to saying for any $t \subseteq T$, there is some $s \in S$ such that $f(s) = t$. Using $f(A) = T \setminus A$, we can obtain an arbitrary element $t \in \mathcal{P}(T)$ by taking in some input $s \in \mathcal{P}(S)$ by setting $A = T \setminus t$. This is valid, as $T \setminus t \subseteq T$, and we already know $T \subseteq S$, so the property $A \subseteq S$ is maintained by transitivity. Now we can say for any $t \in \mathcal{P}(T)$, $t = T \setminus (T \setminus t)$. We know that $T \setminus t \in \mathcal{P}(T)$ as $T \setminus t \subseteq T$. Since $\mathcal{P}(T) \subseteq \mathcal{P}(S)$, we can then conclude that $T \setminus t \in \mathcal{P}(S)$. Since the codomain of $f$ is $\mathcal{P}(T)$, we have just shown it is possible to map all elements of $\mathcal{P}(T)$ back to an element in $\mathcal{P}(S)$, showing that $f$ is surjective. Therefore, this implication is true.
+
+With both sides of the biconditional being proven true, we can say that $f$ is surjective $\iff$ $T \subseteq S$.
+
+\end{enumerate}
+
+\section{Problem 3}
+
+This problem of assigning donuts to boxes can be split into 9 groups, each one containing 8 donuts of a single flavor. Within each of these groups, we can take the 8 donuts as pigeons and then 6 potential boxes of donuts as pigeonholes. Since $8 > 6$, this means that at least one box will have 2 donuts of the same flavor by PHP. Now, if we zoom out, we can have the 9 groups become pigeons and keep the 6 boxes as our pigeonholes. Since $9 > 6$, this means at least two groups will have donuts in the same box by PHP. If we combine both applications of PHP, this means that there will be a box that contains at least two donuts of two different flavors. Alfred can purchase this box.
+
+\end{document}
