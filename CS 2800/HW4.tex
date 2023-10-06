@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[margin=0.75in]{geometry}
+
+\title{\textbf{CS 2800 HW 4}}
+\author{Tanish Tyagi \\ Collaborators: Timothy Li, Anthony Song}
+\date{September 20, 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+
+We perform a proof by induction, where we want to prove $P(n)$ = “It is possible to recolor of row of $n$ boxes from any color $\in$ $\{pink, white, gray\}$ to any other color $\in$ $\{pink, white, gray\}$." \\
+
+\textbf{Base Case:} When $n$ = 0, the boxes can be any color and can be changed to any other color. $P(n)$ holds. \\
+
+\textbf{Inductive Hypothesis:} We assume that for some $k \in \mathbb{N}, P(k)$ is true. That is, for a row of $k$ boxes, we can recolor all of the boxes to and from gray, white, or pink. \\
+
+\textbf{Inductive Step:} We wish to argue that $P(k+1)$ is true. We know that by the inductive hypothesis that you can color the first $k$ boxes to white. From here, we can color the rightmost box to gray. Now, we can use the inductive hypothesis again to conclude that we can color the first $k$ boxes to gray. All $k$ boxes are to the left of the $k+1$ box colored gray, which means it would not interefere with the subsequent coloring of the $k$ boxes. Therefore, all $k+1$ boxes have been colored to gray.
+
+We also can apply similar logic in order to color $k+1$ boxes to and from all the other colors. For example, if all the boxes started off as the color pink and we wished to color the boxes to white, we would first color the first $k$ boxes to gray. Then we would color the $k+1$ block white, and the return to color the first $k$ boxes white. \\
+
+\textbf{Conclusion:} Since the base and inductive steps have now been established, we can conclude that it is possible to recolor all of the boxes to gray given the proposed rules of the game. $\blacksquare$
+
+\section{Problem 2}
+
+\subsection{Problem 2a}
+
+\begin{math}
+h(1) - h(0) = 6 \\ 
+h(2) - h(1) = 6 \cdot 2 \\
+h(3) - h(2) = 6 \cdot 3 \\
+\end{math}
+
+By comparing the differences of the first 4 terms of this sequence, we can see that differences are equal to 6 $\cdot$ [current index of sequence]. This tells us how much the following term increases in comparison to the previous term. From this, we can incorporate the recursive term to obtain the recursive relation $\mathbf{h(l) = 6l + h(l-1)}$. \\
+
+\subsection{Problem 2b}
+
+We aim to perform a proof by induction where we want to prove “$P(n) = h(l) = 3l^2+3l+1$." \\
+
+\textbf{Base Case:} When $n$ = 0, we know that h(0) = 1 by the recurrence relation; in addition, $3(0)^2 + 3(0) + 1$ = 1. Therefore, $P(n)$ holds.\\
+
+\textbf{Inductive Hypothesis:} We assume that $P(k)$ is true for some $k \in \mathbb{N}$. That is, $h(k) = 3k^2+3k+1$. \\
+
+\textbf{Inductive Step:} We wish to argue that $P(k+1)$ is true, meaning that $h(k+1) = 3(k+1)^2+3(k+1)+1$. By the recurrence relation, we know that $h(k+1) = 6(k+1) + h(k)$. By the inductive hypothesis, we can simplify this to $h(k+1) = 6(k+1) + 3k^2  + 3k + 1 = 3k^2 + 9k + 7$. If we expand $3(k+1)^2+3(k+1)+1$, we also will get $3k^2 + 9k + 7$. \\
+
+\textbf{Conclusion:} Since the base case and inductive steps have now been established, we can conclude that $h(l) = 3l^2+3l+1$ for all $l \in \mathbb{N}$. $\blacksquare$
+
+\section{Problem 3}
+
+We aim to a proof by induction where we want to prove $P(n) =$ “A graph G = (V, E) with $n$ edges and exactly two vertices $u, v \in V$ with odd degree has a path between $u$ and $v$. \\ 
+
+\textbf{Base Case:} When $|E| = 1$, this edge can only connect two vertices, each of which must have degree 1. These vertices have to be $u, v$, and since they are connected by the singular edge, there has to be a path between them. \\
+
+\textbf{Inductive Hypothesis:} For some $k \in \mathbb{N^{+}}$, we assume $P(k)$ is true. That is, for any graph with $k$ edges and exactly two vertices with an odd degree, there exists a path between the two dd vertices. \\
+
+\textbf{Inductive Step:} We wish to argue that $P(k+1)$ is true, meaning that when the aforementioned graph has $k+1$ edges and still maintains only two odd vertices, there will be a path between them. 
+
+Let's call $u$ and $v$ the two odd vertices. There are two cases to consider: 
+
+\begin{enumerate}
+
+\item $u$ and $v$ are neighbors: In this case, $u$ and $v$ must be directly connected with an edge, which means that has to be a path between them. 
+
+\item $u$ and $v$ are not neighbors: This must mean either $u$ and $v$ are connected vertices with even-degrees. Let's call the even-degreed vertex $u$ is connected to $w$. If we remove the edge $\{u, w\}$ from $E$, then we obtain a graph $G'$ with $k$ edges, where $w$ now has an odd-degree and u has an even degree (considering a degree of $0$ as even). By the inductive hypothesis, this graph has to have a path between the odd vertices being $w$ and $v$. Now we can add the previously removed edge back to the graph, where it would connect $w$ and $u$, meaning $w$ would return to having an even degree and $u$ an odd degree. To travel between $u$ and $v$, we can just follow the path from $v$ to $w$, and then travel along the added edge from $w$ to $u$.
+\end{enumerate}
+
+\textbf{Conclusion:} Since we have established the base case and inductive steps, we can conclude that in any graph with only two odd vertices, there must be a path between both odd vertices. $\blacksquare$
+
+\end{document}
