@@ -5,13 +5,6 @@
 \usepackage{amsthm}
 \usepackage[margin=0.75in]{geometry}
 
-\usepackage{tikz}
-\usetikzlibrary{arrows,automata,shapes.geometric}
-\tikzstyle{ve}=[circle, draw, thick, fill=carnellian!40, inner sep=0pt, minimum
-size=6pt]
-\tikzstyle{v}=[circle, draw, thick, fill=carnellian!25, inner sep=2pt, minimum
-size=14pt]
-
 \title{\textbf{CS 2800 HW 6}}
 \author{Tanish Tyagi \\ Collaborators: Timothy Li, Anthony Song, Eric Zhou}
 \date{October 11, 2023}
@@ -24,17 +17,17 @@ size=14pt]
 
 \subsection{Problem 1a}
 
-We know that $\mathcal{F}(\mathbb{N})$ is countable if we can construct an injection $f: \mathcal{F}(\mathbb{N}) \rightarrow Y$, where $Y$ is a set that is either finite or countably infinite. From week 6 discussion, we proved that the set S = $\bigcup_{i \in I} S_i$ is countable, where $I$ and $S_i$ are countable sets. This was because we could construct a surjection $f^{*}: \mathbb{N} \times \mathbb{N} \rightarrow S$. \\
+We know that $\mathcal{F}(\mathbb{N})$ is countable if we can construct an injection $f: \mathcal{F}(\mathbb{N}) \rightarrow Y$, where $Y$ is a countable set. Since $\mathcal{F}(\mathbb{N})$ is constructed of finite subsets, we know that the largest cardinality of an element in $\mathcal{F}(\mathbb{N})$ will be some finite number $L$. From week 6 discussion, we proved that the set $S = \bigcup_{i \in I} S_{i}$ is countable, where $I$ and $S_i$ are countable sets. We can apply this to say for $I = \{0, 1, 2, 3, ..., L - 1, L\}$, $S = \bigcup_{i \in I} \mathbb{N}^i$ is countable. \\
 
-We can use this observation to generate the following expression: $Y = \mathbb{N}^0 \cup \mathbb{N}^1 \cup \mathbb{N}^2 ... \cup \mathbb{N}^k$. If we can show that $k \in \mathbb{N}$ and construct an injection from $f: \mathcal{F}(\mathbb{N}) \rightarrow Y$, then we know that $|\mathcal{F}(\mathbb{N})| \le |Y|$, meaning that $\mathcal{F}(\mathbb{N})$ is countable as $Y$ is countable. \\
+Now, if we can construct an injection from $f: \mathcal{F}(\mathbb{N}) \rightarrow Y$, where $Y =\bigcup_{i \in I} \mathbb{N}^i$, then we know that $|\mathcal{F}(\mathbb{N})| \le |Y|$, meaning that $\mathcal{F}(\mathbb{N})$ is countable as $Y$ is countable. \\
 
-The injection we can construct is as follows: $f(A) = B$, where $A = \{a_1, a_2, a_3, ..., a_n\}$, an arbitrary finite subset of $\mathcal{F}(\mathbb{N})$, and $B = (a_1, a_2, a_3, ..., a_n)$, an arbitrary ordered list. We will assign $C$ to be equal to the number of elements in ordered list $B$. We know that $|A|$ = $C$, as $B$ is an ordered list of $A$ with the exact same elements. Additionally, $A$ is a finite subset of $\mathcal{F}(\mathbb{N})$, which means that $C$ is countable. By definition of Cartesian product, we know that $B$ has to be an element of $\mathbb{N}^C$. We know the largest possible subset of $\mathcal{F}(\mathbb{N})$ has to be finite, meaning that the largest value for $C$ will also be countable. \\
+The function we can construct is as follows: $f(A) = B$, where $A \in \mathcal{F}(\mathbb{N}) = \{a_1, a_2, a_3, ..., a_n\}$, an arbitrary finite subset of $\mathcal{F}(\mathbb{N})$, and $B = (a_1, a_2, a_3, ..., a_n)$, an arbitrary ordered list. The definition of injectivity states that $x_1 \neq x_2 \Rightarrow f(x_1) \neq f(x_2)$. If $x_1 \neq x_2$, then either $|x_1| \neq |x_2|$ or $|x_1| = |x_2|$. In the second case, we know that at least some term has to differ to maintain our initial premise. In the first case, if $|x_1| \neq |x_2|$, then we can conclude $f(x_1) \neq f(x_2)$ as $f(x_1)$ and $f(x_2)$ will have a different number of elements. In the second case, while $|f(x_1)| = |f(x_2)|$, there has to be some element $x \in x_1$, but not in $x_2$ or vice versa. Therefore, if $x$ is only in $x_1$, it will be an element of $f(x_1)$ but not $f(x_2)$. We can use similar logic to conclude that if $x$ is only in $x_2$, it will be an element of $f(x_2)$ but not $f(x_1)$. Therefore, in all possible cases, we have shown that if $x_1 \neq x_2$, then $f(x_1) \neq f(x_2)$, meaning that our function $f$ is indeed injective. \\
 
-Therefore, we have shown that $k \in \mathbb{N}$ and demonstrated that an injection $f: \mathcal{F}(\mathbb{N}) \rightarrow Y$ exists. We can now conclude that $\mathcal{F}(\mathbb{N})$ is countable.
+Since we have found an injection $f: \mathcal{F}(\mathbb{N}) \rightarrow \bigcup_{i \in I} \mathbb{N}^i$, we know that $|\mathcal{F}(\mathbb{N})| \leq |\bigcup_{i \in I} \mathbb{N}^i|$. We know that $\bigcup_{i \in I} \mathbb{N}^i$ is countable, meaning that we can conclude $\mathcal{F}(\mathbb{N})$ is also countable.
 
 \subsection{Problem 1b}
 
-The error with this group lies in the definition of $D$, and that in some cases, $D$ can be countably infinite. For example, if $f(k) = \emptyset$, then $D = \mathbb{N}^+$, meaning that $|D|$ is countably infinite. This is an issue because $\mathcal{F}(\mathbb{N})$ is not meant to have countably infinite subsets by its definition. Since $D$ can be countably infinite, it does not share the same codomain as $f$. Therefore, you cannot justify that $f$ is not surjective since $D$ lies outside of its range, leading to a logical breakdown of the proof.
+The error with this proof lies in the definition of $D$, and that it is possible for $D$ not to be finite, which means that it would not even be in the codomain. So even if it could not be mapped to, $f$ could still be surjective. For example, if $f(k) = \emptyset$ for all $k \in \mathbb{N}$, then $D = \mathbb{N}$, as $k \notin f(k)$ for all $k \in \mathbb{N}$. Here, $D$ is not an element of the codmain, which means it does not matter if $D$ is in the range of $f$. This leads to a logical breakdown of the proof.
 
 \section{Problem 2}
 
@@ -52,46 +45,50 @@ To prove that $\preceq_{L}$ is a partial order on $S \times S$, we need to show 
 
 \begin{enumerate}
 
-\item Reflexive: We need to show that $(s_1, t_1) \preceq_{L} (s_1, t_1)$.
+\item Reflexive: We need to show that $(s_1, t_1) \preceq_{L} (s_1, t_1)$ for any arbitrary $(s, t) \in S \times S$, meaning that $(s_1\preceq s_1) \land (s_1 \npreceq s_1 \lor t_1 \preceq t_1)$.
 
-By the definition of $\preceq_{L}$ on $S \times S$, we need to show that $s_1 \preceq s_1$ is true, and that either $s_1 \preceq s_1$ or $t_1 \preceq t_1$ is true. We know that $(s_1, \preceq)$ is a poset, which means that $s_1 \preceq s_1$ has to be true as $(s_1, \preceq)$ has to be reflexive by the definition of posets. We can show that $t_1 \preceq t_1$ is true as $(t_1, \preceq)$ also has to be a poset, meaning that it has to fulfill the property of reflexivity. Therefore, $(S \times S, \preceq_{L})$ is reflexive.
+By the definition of $\preceq_{L}$ on $S \times S$, we need to show that $s_1 \preceq s_1$ is true, and that either $s_1 \npreceq s_1$ or $t_1 \preceq t_1$ is true. We know that $\preceq$ is a poset, which means that $s_1 \preceq s_1$ has to be true as $\preceq$ has to be reflexive by the definition of posets. Likewise $t_1 \preceq t_1$. Therefore, $(s_1\preceq s_1) \land (s_1 \npreceq s_1 \lor t_1 \preceq t_1)$ will evaluate to true, meaning that $(s_1, t_1) \preceq_{L} (s_1, t_1)$. Therefore $\preceq_{L}$ is reflexive.
 
-\item Anti-symmetric: We need to show that $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1) \Rightarrow (s_1, t_1) = (s_2, t_2)$.
+\item Anti-symmetric: We need to show that for any $(s_1, t_1), (s_2, t_2) \in S$, if $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1)$ then $(s_1, t_1) = (s_2, t_2)$.
 
-Let's assume that $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1)$ is true. This tells us that $s_1 \preceq s_2$ and $s_2 \preceq s_1$, and since $(s_1, \preceq)$ is a poset, it has to be anti-symmetric, meaning that $s_1 = s_2$. 
+Let's assume that $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1)$ is true. This tells us that $s_1 \preceq s_2$ and $s_2 \preceq s_1$, and since $\preceq$ is a poset, it has to be anti-symmetric, meaning that $s_1 = s_2$ given that $s_1 \preceq s_2$ and $s_2 \preceq s_1$. 
 
-If $s_1 = s_2$, then $s_1 \npreceq s_2$ and $s_1 \npreceq s_2$ are false. Given our initial assumption, we know that $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1)$. In order for this to be true, this means that $t_1 \preceq t_2$ and $t_2 \preceq t_1$ by the definition of $(S \times S, \preceq_{L})$. Since $(t_1, \preceq)$ has to be a poset, it has fulfill the property of anti-symmetry, meaning that $t_1 = t_2$. 
+Since $s_1 = s_2$ and $\preceq$ is reflexive, then $s_2 \preceq s_1)$, meaning that $s_1 \npreceq s_2$ is false. We can use similar logic to say that $s_1 \preceq s_2$, meaning that $s_1 \npreceq s_2$ is also false. Given our initial assumption, we know that $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1)$. In order for this to be true, this means that $t_1 \preceq t_2$ and $t_2 \preceq t_1$ by the definition of $(S \times S, \preceq_{L})$. Since $\preceq$ has to be a poset, it has fulfill the property of anti-symmetry, meaning that $t_1 = t_2$.
 
-Now that we have shown that $s_1 = s_2$ and $t_1 = t_2$, we can conclude that $(s_1, t_1) = (s_2, t_2)$. Therefore, $(S \times S, \preceq_{L})$ is anti-symmetric.
+Now that we have shown that $s_1 = s_2$ and $t_1 = t_2$, we can conclude that $(s_1, t_1) = (s_2, t_2)$. Therefore, $\preceq_{L}$ is anti-symmetric.
 
 \item Transitive: We need to show that $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_3, t_3) \Rightarrow (s_1, t_1) \preceq_{L} (s_3, t_3)$.
 
-Let's assume $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_3, t_3)$ is true. This tells us that $s_1 \preceq s_2$ and $s_2 \preceq s_3$. Since $(s_1, \preceq)$ is a poset, this means it must be transitive, meaning that $s_1 \preceq s_3$. 
+Let's assume $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_3, t_3)$ is true. Then, we know the following to be true:
 
-To finish our reasoning about whether $(s_1, t_1) \preceq_{L} (s_3, t_3)$, let's consider the following four cases:
+\vspace{-15pt}
+\begin{align*}
+1: (s_1 \preceq s_2) \land (s_2 \npreceq s_1 \lor t_1 \preceq t_2) \\
+2: (s_2 \preceq s_3) \land (s_3 \npreceq s_2 \lor t_2 \preceq t_3) 
+\end{align*}
+
+The first parts of these statements tell us that $s_1 \preceq s_2$ and $s_2 \preceq s_3$. Since $\preceq$ is a poset, this means it must be transitive, meaning that $s_1 \preceq s_3$.
+
+Now we need to show $(s_3 \npreceq s_1 \lor t_1 \preceq t_3)$. We can split this into two cases: either $s_3 \npreceq s_1$ or $s_3 \preceq s_1$.
 
 \begin{enumerate}
 
-\item $(s_1, t_1) \preceq_{L} (s_2, t_2)$ where $s_2 \preceq s_1$; $(s_2, t_2) \preceq_{L} (s_3, t_3)$ where $s_3 \preceq s_2$:
+\item $s_3 \npreceq s_1$
 
-In order for the transitivity implication to hold, $t_1 \preceq t_2$ and $t_2 \preceq t_3$ by the definition of $(S \times S, \preceq_{L})$. Since $(t_1, \preceq)$ is a poset, and $t_1 \preceq t_2$ and $t_2 \preceq t_3$, this means that $t_1 \preceq t_3$ by the property of transitivity.
+Since $s_3 \npreceq s_1$ is true, this means $(s_3 \npreceq s_1 \lor t_1 \preceq t_3)$ overall is true as well by the definition of logical or.
 
-\item $(s_1, t_1) \preceq_{L} (s_2, t_2)$ where $s_2 \preceq s_1$; $(s_2, t_2) \preceq_{L} (s_3, t_3)$ where $t_2 \npreceq t_3$:
+\item $s_3 \preceq s_1$
 
-In order for the transitivity implication to hold, $t_1 \preceq t_2$ and $s_3 \npreceq s_2$ by the definition of $(S \times S, \preceq_{L})$. From earlier, $s_1 \preceq s_2$, $s_2 \preceq s_3$, and $s_1 \preceq s_3$. Since we know $s_1 \preceq s_2$ and $s_2 \preceq s_1$, then we can conclude $s_1 = s_2$ by the property of anti-symmetry, as $(s, \preceq)$ is a poset and therefore anti-symmetric. From here, we can modify $s_3 \npreceq s_2$ to say $s_3 \npreceq s_1$, as $s_1 = s_2$.
+Previously we showed $s_1 \preceq s_3$, and given that $s_3 \preceq s_1$, by the anti-symmetric of partial orders, $s_1 = s_3$. We also previously showed that $s_1 \preceq s_2$ and $s_2 \preceq s_3$. We can combine this with $s_1 = s_3$ to say $s_1 = s_2 = s_3$, as $s_2$ is `compressed' within $s_1$ and $s_3$. 
 
-\item $(s_1, t_1) \preceq_{L} (s_2, t_2)$ where $t_1 \npreceq t_2$; $(s_2, t_2) \preceq_{L} (s_3, t_3)$ where $s_3 \preceq s_2$:
-
-In order for the transitivity implication to hold, $s_2 \npreceq s_1$ and $t_2 \preceq t_3$ by the definition of $(S \times S, \preceq_{L})$. From earlier, $s_1 \preceq s_2$, $s_2 \preceq s_3$, and $s_1 \preceq s_3$. If $s_2 \preceq s_3$ and $s_3 \preceq s_2$, then we can conclude that $s_2 = s_3$ by the property of anti-symmetry as $(s, \preceq)$ is a poset and therefore anti-symmetric. From here, we can modify the statement $s_2 \npreceq s_1$ to say $s_3 \npreceq s_1$, as $s_2 = s_3$.
-
-\item $(s_1, t_1) \preceq_{L} (s_2, t_2)$ where $t_1 \npreceq t_2$; $(s_2, t_2) \preceq_{L} (s_3, t_3)$ where $t_2 \npreceq t_3$:
-
-In order for the transitivity implication to hold, $s_2 \npreceq s_1$ and $s_3 \npreceq s_2$ by the definition of $(S \times S, \preceq_{L})$. Since $(s, \preceq)$ is a poset, it is therefore transitive. Since we know $s_3 \npreceq s_2$ and $s_2 \npreceq s_1$, we can apply this property of transitivity to conclude that $s_3 \npreceq s_1$.
+By reflexivity, $s_2 \preceq s_1$. This means that in order for the second part of statement 1 to be true, $t_1 \preceq t_2$. We can use similar logic to say $s_3 \preceq s_2$, meaning that in order for the second part of statement 1 to be true, $t_2 \preceq t_3$. Since $\preceq$ is a poset, it has to be transitive, meaning that if $t_1 = t_2$ and $t_2 = t_3$, then $t_1 = t_3$. Therefore, $(s_3 \npreceq s_1 \lor t_1 \preceq t_3)$ is also true.
 
 \end{enumerate}
 
+In all possible cases, we have now shown $(s_3 \npreceq s_1 \lor t_1 \preceq t_3)$  to be true. As we have previously shown $s_1 \preceq s_3$, we know that $(s_1 \preceq s_3) \land (s_3 \npreceq s_1 \lor t_1 \preceq t_3)$ is also always true. Therefore, $\preceq_{L}$ is transitive.
+
 \end{enumerate}
 
-For case (a), since we now know that $t_1 \preceq t_3$, we can conclude that $(s_1, t_1) \preceq_{L} (s_3, t_3)$ by the definition of $(S \times S, \preceq_{L})$. For cases (b) - (d), since we now that that $s_3 \npreceq s_1$, we can also conclude that $(s_1, t_1) \preceq_{L} (s_3, t_3)$. This means that we have proven $\preceq_{L}$ is a partial order on $S \times S$.
+As we have now proved $\preceq_{L}$ is reflexive, anti-symmetric, and transitive on $S \times S$, this means that $\preceq_{L}$ is a partial order on $S \times S$.
 
 \end{document}
