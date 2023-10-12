@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage[margin=0.75in]{geometry}
+% \usepackage[margin=0.75in]{geometry}
 
 \title{\textbf{CS 2800 HW 6}}
 \author{Tanish Tyagi \\ Collaborators: Timothy Li, Anthony Song, Eric Zhou}
@@ -17,17 +17,17 @@
 
 \subsection{Problem 1a}
 
-We know that $\mathcal{F}(\mathbb{N})$ is countable if we can construct an injection $f: \mathcal{F}(\mathbb{N}) \rightarrow Y$, where $Y$ is a countable set. Since $\mathcal{F}(\mathbb{N})$ is constructed of finite subsets, we know that the largest cardinality of an element in $\mathcal{F}(\mathbb{N})$ will be some finite number $L$. From week 6 discussion, we proved that the set $S = \bigcup_{i \in I} S_{i}$ is countable, where $I$ and $S_i$ are countable sets. We can apply this to say for $I = \{0, 1, 2, 3, ..., L - 1, L\}$, $S = \bigcup_{i \in I} \mathbb{N}^i$ is countable. \\
+We know that $\mathcal{F}(\mathbb{N})$ is countable if we can construct an injection $f: \mathcal{F}(\mathbb{N}) \rightarrow Y$, where $Y$ is a countable set. From week 6 discussion, we proved that the set $S = \bigcup_{i \in \mathbb{N}} S_{i}$ is countable, $S_i$ are countable sets. We also know that the $|\mathbb{N}|$ is countable. We can apply this to say for $S = \bigcup_{i \in \mathbb{N}} \mathbb{N}^i$ is countable. \\
 
-Now, if we can construct an injection from $f: \mathcal{F}(\mathbb{N}) \rightarrow Y$, where $Y =\bigcup_{i \in I} \mathbb{N}^i$, then we know that $|\mathcal{F}(\mathbb{N})| \le |Y|$, meaning that $\mathcal{F}(\mathbb{N})$ is countable as $Y$ is countable. \\
+Now, if we can construct an injection from $f: \mathcal{F}(\mathbb{N}) \rightarrow Y$, where $Y =\bigcup_{i \in \mathbb{N}} \mathbb{N}^i$, then we know that $|\mathcal{F}(\mathbb{N})| \le |Y|$, meaning that $\mathcal{F}(\mathbb{N})$ is countable as long as $Y$ is countable. \\
 
-The function we can construct is as follows: $f(A) = B$, where $A \in \mathcal{F}(\mathbb{N}) = \{a_1, a_2, a_3, ..., a_n\}$, an arbitrary finite subset of $\mathcal{F}(\mathbb{N})$, and $B = (a_1, a_2, a_3, ..., a_n)$, an arbitrary ordered list. The definition of injectivity states that $x_1 \neq x_2 \Rightarrow f(x_1) \neq f(x_2)$. If $x_1 \neq x_2$, then either $|x_1| \neq |x_2|$ or $|x_1| = |x_2|$. In the second case, we know that at least some term has to differ to maintain our initial premise. In the first case, if $|x_1| \neq |x_2|$, then we can conclude $f(x_1) \neq f(x_2)$ as $f(x_1)$ and $f(x_2)$ will have a different number of elements. In the second case, while $|f(x_1)| = |f(x_2)|$, there has to be some element $x \in x_1$, but not in $x_2$ or vice versa. Therefore, if $x$ is only in $x_1$, it will be an element of $f(x_1)$ but not $f(x_2)$. We can use similar logic to conclude that if $x$ is only in $x_2$, it will be an element of $f(x_2)$ but not $f(x_1)$. Therefore, in all possible cases, we have shown that if $x_1 \neq x_2$, then $f(x_1) \neq f(x_2)$, meaning that our function $f$ is indeed injective. \\
+The function we can construct is as follows: $f(A) = B$, where $A \in \mathcal{F}(\mathbb{N}) = \{a_1, a_2, a_3, ..., a_n\}$, an arbitrary finite subset of $\mathcal{F}(\mathbb{N})$, and $B = (a_1, a_2, a_3, ..., a_n)$, an arbitrary ordered list. The definition of injectivity states that $x_1 \neq x_2 \Rightarrow f(x_1) \neq f(x_2)$. If $x_1 \neq x_2$, then it is either possible that $|x_1| \neq |x_2|$ or $|x_1| = |x_2|$. In the second case, we know that at least some term has to differ to maintain our initial premise that $x_1 \neq x_2$. In the first case, if $|x_1| \neq |x_2|$, then we can conclude $f(x_1) \neq f(x_2)$ as $f(x_1)$ and $f(x_2)$ will have a different number of elements. In the second case, while $|f(x_1)| = |f(x_2)|$, there has to be some element $x \in x_1$, but not in $x_2$ or vice versa. Therefore, if $x$ is only in $x_1$, it will be an element of $f(x_1)$ but not $f(x_2)$, proving that $f(x_1) \neq f(x_2)$. We can use similar logic to conclude that if $x$ is only in $x_2$, it will be an element of $f(x_2)$ but not $f(x_1)$, again showing that $f(x_1) \neq f(x_2)$. Therefore, in all possible cases, we have shown that if $x_1 \neq x_2$, then $f(x_1) \neq f(x_2)$, meaning that our function $f$ is indeed injective. \\
 
-Since we have found an injection $f: \mathcal{F}(\mathbb{N}) \rightarrow \bigcup_{i \in I} \mathbb{N}^i$, we know that $|\mathcal{F}(\mathbb{N})| \leq |\bigcup_{i \in I} \mathbb{N}^i|$. We know that $\bigcup_{i \in I} \mathbb{N}^i$ is countable, meaning that we can conclude $\mathcal{F}(\mathbb{N})$ is also countable.
+Since we have found an injection $f: \mathcal{F}(\mathbb{N}) \rightarrow \bigcup_{i \in \mathbb{N}} \mathbb{N}^i$, we know that $|\mathcal{F}(\mathbb{N})| \leq |\bigcup_{i \in \mathbb{N}} \mathbb{N}^i|$. We know that $\bigcup_{i \in \mathbb{N}} \mathbb{N}^i$ is countable, meaning that we can conclude $\mathcal{F}(\mathbb{N})$ is also countable. $\blacksquare$
 
 \subsection{Problem 1b}
 
-The error with this proof lies in the definition of $D$, and that it is possible for $D$ not to be finite, which means that it would not even be in the codomain. So even if it could not be mapped to, $f$ could still be surjective. For example, if $f(k) = \emptyset$ for all $k \in \mathbb{N}$, then $D = \mathbb{N}$, as $k \notin f(k)$ for all $k \in \mathbb{N}$. Here, $D$ is not an element of the codmain, which means it does not matter if $D$ is in the range of $f$. This leads to a logical breakdown of the proof.
+The error with this proof lies in the definition of $D$, and that it is possible for $D$ not to be finite, which means that it would not even be in the codomain. So even if it could not be mapped to, $f$ could still be surjective. For example, if $f(k) = \emptyset$ for all $k \in \mathbb{N}$, then $D = \mathbb{N}$, as $k \notin f(k)$ for all $k \in \mathbb{N}$. Here, $D$ is not an element of the codmain, which means it does not matter if $D$ is in the range of $f$. This leads to a logical breakdown of the proof. It is important to note that disproving this proof does not show that $\mathcal{F}(\mathbb{N})$ is countable.
 
 \section{Problem 2}
 
@@ -51,9 +51,9 @@ By the definition of $\preceq_{L}$ on $S \times S$, we need to show that $s_1 \p
 
 \item Anti-symmetric: We need to show that for any $(s_1, t_1), (s_2, t_2) \in S$, if $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1)$ then $(s_1, t_1) = (s_2, t_2)$.
 
-Let's assume that $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1)$ is true. This tells us that $s_1 \preceq s_2$ and $s_2 \preceq s_1$, and since $\preceq$ is a poset, it has to be anti-symmetric, meaning that $s_1 = s_2$ given that $s_1 \preceq s_2$ and $s_2 \preceq s_1$. 
+Let's assume that $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1)$ is true. This tells us that $s_1 \preceq s_2$ and $s_2 \preceq s_1$, and since $\preceq$ is a poset, it has to be anti-symmetric, meaning that $s_1 = s_2$ given that $s_1 \preceq s_2$ and $s_2 \preceq s_1$.
 
-Since $s_1 = s_2$ and $\preceq$ is reflexive, then $s_2 \preceq s_1)$, meaning that $s_1 \npreceq s_2$ is false. We can use similar logic to say that $s_1 \preceq s_2$, meaning that $s_1 \npreceq s_2$ is also false. Given our initial assumption, we know that $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1)$. In order for this to be true, this means that $t_1 \preceq t_2$ and $t_2 \preceq t_1$ by the definition of $(S \times S, \preceq_{L})$. Since $\preceq$ has to be a poset, it has fulfill the property of anti-symmetry, meaning that $t_1 = t_2$.
+Since $s_1 = s_2$ and $\preceq$ is reflexive, then $s_2 \preceq s_1$, meaning that $s_1 \npreceq s_2$ is false. We can use similar logic to say that $s_2 \preceq s_1$, meaning that $s_2 \npreceq s_1$ is also false. Given our initial assumption, we know that $(s_1, t_1) \preceq_{L} (s_2, t_2) \land (s_2, t_2) \preceq_{L} (s_1, t_1)$. In order for this to be true, this means that $t_1 \preceq t_2$ and $t_2 \preceq t_1$ by the definition of $(S \times S, \preceq_{L})$. Since $\preceq$ has to be a poset, it has fulfill the property of anti-symmetry, meaning that $t_1 = t_2$ if $t_1 \preceq t_2$ and $t_2 \preceq t_1$.
 
 Now that we have shown that $s_1 = s_2$ and $t_1 = t_2$, we can conclude that $(s_1, t_1) = (s_2, t_2)$. Therefore, $\preceq_{L}$ is anti-symmetric.
 
@@ -81,7 +81,7 @@ Since $s_3 \npreceq s_1$ is true, this means $(s_3 \npreceq s_1 \lor t_1 \preceq
 
 Previously we showed $s_1 \preceq s_3$, and given that $s_3 \preceq s_1$, by the anti-symmetric of partial orders, $s_1 = s_3$. We also previously showed that $s_1 \preceq s_2$ and $s_2 \preceq s_3$. We can combine this with $s_1 = s_3$ to say $s_1 = s_2 = s_3$, as $s_2$ is `compressed' within $s_1$ and $s_3$. 
 
-By reflexivity, $s_2 \preceq s_1$. This means that in order for the second part of statement 1 to be true, $t_1 \preceq t_2$. We can use similar logic to say $s_3 \preceq s_2$, meaning that in order for the second part of statement 1 to be true, $t_2 \preceq t_3$. Since $\preceq$ is a poset, it has to be transitive, meaning that if $t_1 = t_2$ and $t_2 = t_3$, then $t_1 = t_3$. Therefore, $(s_3 \npreceq s_1 \lor t_1 \preceq t_3)$ is also true.
+By the above equality and reflexivity, $s_2 \preceq s_1$. This means that in order for the second part of statement 1 to be true, $t_1 \preceq t_2$. We can use similar logic to say $s_3 \preceq s_2$, meaning that in order for the second part of statement 1 to be true, $t_2 \preceq t_3$. Since $\preceq$ is a poset, it has to be transitive, meaning that if $t_1 = t_2$ and $t_2 = t_3$, then $t_1 = t_3$. Therefore, $(s_3 \npreceq s_1 \lor t_1 \preceq t_3)$ is also true.
 
 \end{enumerate}
 
@@ -89,6 +89,6 @@ In all possible cases, we have now shown $(s_3 \npreceq s_1 \lor t_1 \preceq t_3
 
 \end{enumerate}
 
-As we have now proved $\preceq_{L}$ is reflexive, anti-symmetric, and transitive on $S \times S$, this means that $\preceq_{L}$ is a partial order on $S \times S$.
+As we have now proved $\preceq_{L}$ is reflexive, anti-symmetric, and transitive on $S \times S$, this means that $\preceq_{L}$ is a partial order on $S \times S$. $\blacksquare$
 
 \end{document}
