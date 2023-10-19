@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\title{\textbf{CS 2800 HW 7}}
+\author{Tanish Tyagi \\ Collaborators: Timothy Li, Anthony Song, Eric Zhou}
+\date{October 18, 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+
+\subsection{Problem 1a}
+
+To show $\approx$ is an equivalence relation, we must show that $\approx$ is reflexive, symmetric, and transitive.
+
+\begin{enumerate}
+
+\item Reflexive: Need to show $(x_1, y_1) \approx (x_1, y_1)$ for any $(x, y) \in \mathbb{N}^2$.
+
+$x_1 - x_1 = 0 = y_1 - y_1$, therefore we know that $(x_1, y_1) \approx (x_1, y_1)$ for any $(x, y) \in \mathbb{N}^2$.
+
+\item Symmetric: Need to show that $(x_1, y_1) \approx (x_2, y_2) \Rightarrow (x_2, y_2) \approx (x_1, y_1)$ for any $(x_1, y_1), (x_2, y_2) \in \mathbb{N}^2$.
+
+Assume $(x_1, y_1) \approx (x_2, y_2)$. Therefore, $x_1 - x_2 = y_1 - y_2$. If we multiply both sides by $-1$, then we get $x_2 - x_1 = y_2 - y_1$. This implies that $(x_2, y_2) \approx (x_1, y_1)$ for any $(x_1, y_1), (x_2, y_2) \in \mathbb{N}^2$.
+
+\item Transitive: Need to show that if $(x_1, y_1) \approx (x_2, y_2) \land (x_2, y_2) \approx (x_3, y_3) \Rightarrow (x_1, y_1) \approx (x_3, y_3)$ for any $(x_1, y_1), (x_2, y_2), (x_3, y_3) \in \mathbb{N}^2$.
+
+If we assume $(x_1, y_1) \approx (x_2, y_2) \land (x_2, y_2) \approx (x_3, y_3)$, then we know that $ 1: x_1 - x_2 = y_1 - y_2$ and $2: x_2 - x_3 = y_2 - y_3$. If we add equations $1$ and $2$, we obtain $x_1 - x_3 = y_1 - y_3$, which implies that $(x_1, y_1) \approx (x_3, y_3)$. Therefore, $\approx$ is transitive for any $(x_1, y_1), (x_2, y_2), (x_3, y_3) \in \mathbb{N}^2$.
+
+\end{enumerate}
+
+As we have now shown that $\approx$ is reflexive, symmetric, and transitive, we can conclude that $\approx$ is an equivalence relation.  $\blacksquare$
+
+\subsection{Problem 1b}
+
+For some arbitrary $(x, y) \in f(z)$, we need to show that for any $(x', y') \in \mathbb{N}^2$, $(x', y') \approx (x,y) \iff (x', y') \in f(z)$. We can split this into two sub-proofs:
+
+\begin{enumerate}
+
+\item $(x', y') \approx (x, y) \Rightarrow (x', y') \in f(z)$.
+
+Assume $(x', y') \approx (x, y)$. This means that $x' - x = y' - y$. We can rewrite this to say $x' - y' = x - y$. Since we know that $(x, y) \in f(z)$, $x = y + z$, which we can rewrite to say $z = x - y$. Therefore, $x' - y' = z$, which means that $x' = y' + z$. Since we also know that $(x', y')$ is in $\mathbb{N}^2$, we can conclude that $(x', y')$ is in $f(z)$.
+
+\item $(x', y') \in f(z) \Rightarrow (x', y') \approx (x, y)$.
+
+If $(x', y') \in f(z)$, then we know that $x' = y' + z$. From earlier, we also know that $(x, y) \in f(z)$, meaning that $x = y + z$. We can say that $x' = y' + (x - y)$, which is equivalent to $x' - x = y'- y$. This implies that $(x', y') \approx (x, y)$. 
+
+\end{enumerate}
+
+As we now have proven both directions of the biconditional, we know that for any $(x, y) \in f(z)$, where $(x', y') \in \mathbb{N}^2$, $(x', y') \approx (x, y) \iff (x', y') \in f(z)$. This means that for any $z \in \mathbb{Z}$, $f(z)$ is an equivalence class of $\approx$. $\blacksquare$
+
+\subsection{Problem 1c}
+
+To prove that $f$ is a surjection, we need to show that for any $S \in \mathbb{N}^2/\approx$, there is some $z \in \mathbb{Z}$ such that $f(z) = S$. 
+
+Take some arbitrary equivalence class $S$ in $ \mathbb{N}^2/\approx$. Since $S$ is an equivalence class, we can assume that it is nonempty and take some $(s_1, s_2)$ in $S$ and define $S$ as the set which contains all ordered pairs $(x, y)$ related by $\approx$ to $(s_1, s_2)$. $S = \{(x, y) \in \mathbb{N}^2 | x - y = s_1 - s_2\}$. We want to show that $f(z) = S$, meaning that $\{(x, y) \in \mathbb{N}^2 | x - y = z\}$ should equal $S$. If we let $z = s_1 - s_2$, then $f(z) = \{(x, y) \in \mathbb{N}^2 | x - y = s_1 - s_2\}$, which is equal to $S$. As $S$ is in $ \mathbb{N}^2/\approx$, we know that $z \in \mathbb{Z}$ as $s_1$ and $s_2$ are both natural numbers. Therefore, we have shown that for any $S \in \mathbb{N}^2/\approx$, there exists for $z \in \mathbb{Z}$ such that $f(z) = S$. Hence, $f$ is surjective. $\blacksquare$
+
+\subsection{Problem 1d}
+
+To prove that $f$ is an injection, we need to show that for any $z_1, z_2 \in \mathbb{Z}$, if $f(z_1) = f(z_2)$ then $z_1 = z_2$.
+
+Assume that $f(z_1) = f(z_2)$. For some arbitrary $(x, y) \in f(z_1)$, we know it must also be an element of $f(z_2)$ because of set equality. This means that $\{(x, y) \in \mathbb{N}^2 | x = y + z_1\}$ = $\{(x, y) \in \mathbb{N}^2 | x = y + z_2\}$. From this, we obtain two equations: $x - y = z_1$ and $x - y = z_2$. We can set these equations equal to each other, meaning that $z_1 = z_2$. Therefore, we have proven that $f$ is an injection. $\blacksquare$
+
+\subsection{Problem 1e}
+
+If $(x, y) \in f(z)$, then we know that $x = y + z$, which means that $x - y = z$. If we subtract one from both sides to get $x - y - 1 = z - 1$, this can be rewritten as $x - (y + 1) = z - 1$. $f(z - 1) = \{(x, y) \in \mathbb{N}^2 | x - y = z - 1\}$, which means that $(x, y + 1) \in f(z - 1)$. $\blacksquare$
+
+\section{Problem 2}
+
+\begin{center}
+\includegraphics[scale = 0.8]{cs 2800 2.png}
+\end{center}
+
+\section{Problem 3}
+
+\subsection{Problem 3a}
+
+$\mathcal{L}(M_2)$ consists of all binary strings that end in ‘10’.
+
+\subsection{Problem 3b}
+
+\begin{center}
+\includegraphics[scale = 0.8]{cs 2800 3b.png}
+\end{center}
+
+\end{document}
