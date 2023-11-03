@@ -1,0 +1,144 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{derivative}
+\usepackage{setspace}
+\usepackage[margin=0.75in]{geometry}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\title{\textbf{Math 1920 Prelim 2 Notes}}
+\author{\textbf{Tanish Tyagi}}
+\date{\textbf{November 2023}}
+
+\begin{document}
+
+\maketitle
+
+\section{Chapter 17}
+
+\subsection{17.1}
+
+If $F = [F_1, F_2, F_3]$ is conservative, then this means $F= \nabla f$. Note that $f$ is not a vector field, but is rather represented as $f(x,y,z)$. Then, in $\mathbb{R}^3$, $$\frac{\partial F_1}{\partial y} = \frac{\partial F_2}{\partial x}, \frac{\partial F_2}{\partial z} = \frac{\partial F_3}{\partial y}, \frac{\partial F_3}{\partial x} = \frac{\partial F_1}{\partial z}$$
+
+Proof: $F_1 = \frac{\partial f}{\partial x}, F_2 = \frac{\partial f}{\partial z}, F_3 = \frac{\partial f}{\partial z}$ as $F$ is conservative. Therefore, $\frac{\partial}{\partial y} \frac{\partial f}{\partial x} = \frac{\partial}{\partial x} \frac{\partial f}{\partial y}$. The order of partial derivatives does not matter, so these are equal. We can similar logic to the other two equalities. \\
+
+We can use these equalities to conclude whether a vector field is conservative or not. Additionally, we can check the curl of $F$: if curl($F$) = 0, then $F$ is conservative. These methods only work if we are in a simply connected domain -- a region that does not have any “holes.”
+
+\subsection{17.2}
+
+Line integral: integral of a function $f$ along a curve $C$.
+
+\subsubsection{Scalar Line Integrals}
+
+Riemann Sums Approach: 
+Divide $C$ into $N$ arcs, $C_1, C_2,..,C_N$. Choose sample point $P_i$ in each arc.
+
+$$
+\sum_{1}^{N} f(P_i) \cdot ||C_i||
+$$
+
+We know that the length of $C$ = $\sum_{1}^{N} ||C_i||$. Let's say $C$ is parametrized by some curve $r(t) = [x(t), y(t), z(t)]$ from a $\leq$ t $\leq$ b. By the arclength integral, the length of C = $\int_{a}^{b}\sqrt{\frac{dx}{dt}^2 + \frac{dy}{dt}^2 + \frac{dz}{dt}^2} dt$. This equals $\int_{a}^{b}||r'(t)||dt$. We can likewise parameterize $\sum_{1}^{N} f(P_i)$ as $\int_{a}^{b} f(r(t))dt$. We can combine this to get:
+
+$$
+\sum_{1}^{N} f(P_i) \cdot ||C_i|| = \int_{a}^{b} f(r(t)) \cdot ||r'(t)|| dt = \int_{a}^{b} f ds
+$$
+
+$ds$ is notation; represents $||r'(t)|| dt$.
+
+\subsubsection{Vector Line Integrals}
+
+Represents values such as work (energy expended to counteract force of gravity). Depends on the direction one is taking along the curve. \\ 
+
+Suppose we have some vector field $F = [F_1, F_2, F_3]$ and we get the work done over some curve $r(t) = [x(t), y(t), z(t)]$.
+
+Work = $F \cdot D$, our $D$ is in the unit tangent vector $T$. Therefore, we get the formula to be:
+
+$$
+\int_{C}^{} F \cdot T ds
+$$
+
+$$
+T ds = \frac{r'(t)}{||r'(t)||} ||r'(t)|| = r'(t)
+$$
+
+$$
+\int_{C}^{} F \cdot T ds = \int_{a}^{b} F(r(t)) \cdot r'(t) dt = \int_{C}^{} F \cdot dr
+$$
+
+$dr$ is notation; represents $r'(t)dt$
+
+$$
+\int_{C}^{} F \cdot dr = \int_{C}^{} F_1 \frac{dx}{dt} + F_2 \frac{dy}{dt} + F_3 \frac{dz}{dt} dt
+$$
+
+$$
+\int_{C}^{} F_1 \frac{dx}{dt} + F_2 \frac{dy}{dt} + F_3 \frac{dz}{dt} dt = \int_{a}^{b} F(r(t)) \cdot r'(t) dt = \int_{a}^{b} \biggl(F_1(r(t)) \frac{dx}{dt} + F_2(r(t)) \frac{dy}{dt} + F_3(r(t)) \frac{dz}{dt}\biggl) dt
+$$
+
+For some curve $C$, $-C$ denotes traveling along $C$ in the opposite direction.
+
+$$
+\int_{C}^{} F \cdot dr = -\int_{-C}^{} F \cdot dr
+$$
+
+Work done against a force field is the negative of work done by the force field: $-\int_{C}^{}(F \cdot dr)$
+
+Another application of vector line integrals is Flux. Flux is defined as the component of the flow rate which is perpendicular to the curve. Flux of vector field $F$ across curve $C$ parameterized by $r(t) = [x(t), y(t)]$ is defined as $\int_{C}^{}(F \cdot N)ds$. $F \cdot N$ represents component of $F$ that is passing a point on the curve.
+
+\begin{center}
+\includegraphics[scale = 0.7]{flux.png}
+\end{center}
+
+Remember that the normal vector needs to be perpendicular to tangent vector.
+
+$$
+N(t) = \frac{N(t)}{||N(t)||}, N(t) = [y(t), -x(t)], ||N(t)|| = ||r'(t)||, N(t) = \frac{N(t)}{||r'(t)||}
+$$
+
+$$
+\int_{C}^{}(F \cdot N)ds = \int_{a}^{b} F(r(t)) \cdot \frac{N(t)}{||r'(t)||} ||r'(t)|| dt = \int_{a}^{b} F(r(t)) \cdot N(t) dt
+$$
+
+\subsection{17.3}
+
+In this section, we will assume that a vector field $F$ is conservative (i.e. $F = \nabla f$).
+
+Let $r(t)$ be a path along a curve $C$ for $a \leq t \leq b$ with $r(a) = P$ and $r(b) = Q$. Then:
+
+$$
+\int_{c}^{} F \cdot dr = \int_{c}^{} \nabla f \cdot dr = \int_{a}^{b} \nabla f(r(t)) \cdot r'(t) dt = \int_{a}^{b} \frac{d}{dt} \nabla f(r(t)) dt = f(r(b)) - f(r(b)) = f(Q) - f(P).
+$$
+
+This shows that for line integrals of conservative vector fields, it does not matter how the path travels from $a$ to $b$ as long as it gets there. If $r$ is closed, then $f(Q) - f(P) = 0$.
+ 
+\subsubsection{Applications of Conservative Vector Fields in Physics}
+
+By physics conventions, $F = -\nabla V$. At some point P, $V(P)$ is the potential energy at that point.
+
+Conservation of Energy says $E = KE + PE$ is constant. Suppose a particle moves along a path $r(t)$.
+
+$$
+E = KE + PE = \frac{1}{2}m v \cdot v + V(r(t))
+$$
+
+$$
+\frac{dE}{dt} = \frac{1}{2}m (v \cdot v) + V'(r(t)) \cdot r(t) \\ = \frac{1}{2} m  \biggl(v \cdot \frac{dv}{dt} + \frac{dv}{dt} \cdot v \biggl) + V'(r(t)) \cdot r(t)
+$$
+
+$$
+= m(v \cdot a) - F \cdot v = v \cdot ma - F \cdot v = v \cdot ma - ma \cdot v = 0
+$$
+
+\subsubsection{Vortex Field}
+
+$$
+F = \biggl<\frac{-y}{x^2 + y^2}, \frac{x}{x^2 + y^2}\biggl>
+$$
+
+$F$ passes the cross partial tests, however its domain is not simply connected (not defined at (0,0)). Therefore, on $\mathbb{R}^2$, $F$ is not conservative. However, it can be on domains that do not include (0,0). \textbf{From this, we can say that if the cross partials are equals, that guarantees $F$ is conservative as long as the domain is simply connected.}
+
+\end{document}
