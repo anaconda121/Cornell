@@ -1,0 +1,132 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath,amssymb}
+\usepackage[margin=0.75in]{geometry}
+
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Corr}{\mathrm{Corr}}
+\DeclareMathOperator{\EX}{\mathbb{E}}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\title{\textbf{CS 2800 HW 12}}
+\author{\textbf{Tanish Tyagi}}
+\date{\textbf{December 4 2023}}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+
+\subsection{Problem 1a}
+
+$B_i$ assumes a geometric distribution with $p = \frac{i}{8}$.
+
+\noindent $\EX(B_i) = \frac{1}{p} = \frac{1}{\frac{i}{8}} = \frac{8}{i}$
+
+\noindent $\Var(B_i) = \frac{1 - p}{p^2} = \frac{1 - (\frac{i}{8})^2}{(\frac{i}{8})^2} = \frac{64 - 8i}{i^2}$
+
+\subsection{Problem 1b}
+
+To envision this relationship, we can start with $B_8$, which represents the number of boxes that must be purchased before a ticket from one of the \textbf{8} particular colors is collected. 
+$B_7$ would then represent the number of boxes that need to be bought before a ticket that is one of the remaining seven colors is found. If we continue with this analogy, we can see each iteration of the summation will eliminate one of the possible colors that we are looking for, until we have eventually collected a ticket of every single color.
+
+\subsection{Problem 1c}
+
+Using the linearity of expectation, $\EX(B) = \sum_{i = 1}^{8} \EX(B_i) = \sum_{i = 1}^{8} \frac{8}{i} = \frac{761}{35}$.
+
+\noindent Using the linearity of variance, we can similarly state $\Var(B) = \sum_{i = 1}^{8}\Var(B_i) = \sum_{i = 1}^{8}\frac{64 - 8i}{i^2} = \frac{838034}{11025}$.
+
+\section{Problem 2}
+
+\subsection{Problem 2a}
+
+$$f_S(x) = \frac{50 - x}{\binom{50}{2}}$$
+
+$$f_L(x) = \frac{x - 1}{\binom{50}{2}}$$
+
+\subsection{Problem 2b}
+
+$$\EX(S) = \sum_{x = 1}^{50} \frac{x \cdot (50 - x)}{\binom{50}{2}} = 17$$
+
+$$\EX(L) = \sum_{x = 1}^{50} \frac{x \cdot (x - 1)}{\binom{50}{2}} = 34$$
+
+\subsection{Problem 2c}
+
+$$\EX(S^2) = \sum_{x = 1}^{50} \frac{x^2 \cdot (50 - x)}{\binom{50}{2}} = 425$$
+
+$$\EX(L) = \sum_{x = 1}^{50} \frac{x^2 \cdot (x - 1)}{\binom{50}{2}} = 1292$$
+
+$$\Var(S) = \EX(S^2) - (\EX(S))^2 = 425 - 189 - 136$$
+
+$$\Var(L) = \EX(L^2) - (\EX(L))^2 = 1292 - 1156 = 136$$
+
+\subsection{Problem 2d}
+
+$$\EX(S, L) = \sum_{S \in R_S}^{} \sum_{L \in R_L}^{} SL \cdot f_{S, L}(S, L)) = \sum_{S = 1}^{49} \sum_{L = S + 1}^{50} \frac{SL}{\binom{50}{2}} = 646$$
+
+$$\Cov(S, L) = \EX(SL) - \EX(S)\EX(L) = 646 - 17 \cdot 34 = 68$$
+
+\subsection{Problem 2e}
+
+$$\Corr(S, L) = \frac{\Cov(S, L)}{\sqrt{\Var(S)}\sqrt{\Var(L)}} = \frac{68}{\sqrt{136}\sqrt{136}} = \frac{1}{2}$$
+
+The correlation is positive, which makes sense--as the smaller value gets larger, it ensures that the larger value is picked out of a smaller set of larger numbers, increasing the likelihood the larger value is closer to 50. This means that as the smaller value gets larger, so does the larger value.
+
+\section{Problem 3}
+
+\subsection{Problem 3a}
+
+For events $A_1, ..., A_n$ to be mutually independent, $\Pr(A_1 \cap A_2 ... \cap A_n) = \Pr(A_1) \cdot \Pr(A_2) ... \cdot \Pr(A_n)$. $\Pr(A_1 \cap A_2 ... \cap A_n)$ means that every single element $i \in [n]$ would have to be an element of set A. The probability of this $(\frac{1}{2})^n$. 
+
+\noindent We know that $\Pr(A_i) = \frac{|A|}{2^n}$, meaning that $\Pr(A_1) \cdot \Pr(A_2) ... \cdot \Pr(A_n) = \left(\frac{|A|}{2^n}\right)^n$. To calculate the cardinality of $A$, we can create a summation to solve for its expected value. For a subset of size $k$, there are $\binom{n}{k}$ different possible subsets, each with probability $\frac{k}{n}$ of being chosen. Therefore, we can set up the following summation: 
+
+$$|A| = \sum_{k = 1}^{n} \binom{n}{k} \cdot \frac{k}{n} = \frac{1}{n} \sum_{k = 1}^{n} \binom{n}{k} \cdot k = \frac{1}{n} \sum_{k = 1}^{n} \frac{n!}{(k - 1)!(n - k)!} = \frac{1}{n} \sum_{k = 1}^{n} n \cdot \binom{n - 1}{k - 1} = \sum_{k = 1}^{n} \binom{n - 1}{k - 1}$$.
+
+\noindent We can reindex this summation to the following:
+
+$$\sum_{k = 0}^{n - 1} \binom{n - 1}{k}  = 2^{n - 1}$$
+
+\noindent Plugging this back into $\Pr(A_1) \cdot \Pr(A_2) ... \cdot \Pr(A_n)$. $\Pr(A_1 \cap A_2 ... \cap A_n)$, we get: $\left(\frac{2^{n-1}}{2^n}\right)^n = \left(\frac{1}{2}\right)^n$, which is the same expression we obtained for $\Pr(A_1 \cap A_2 ... \cap A_n)$. Therefore, we have shown events $A_1, ..., A_n$ are mutually independent.
+
+\subsection{Problem 3b}
+
+We can construct the following summation:
+
+$$\sum_{k = 0}^{n} \binom{n}{k} \cdot (2)^{n - k}$$
+
+\noindent $\binom{n}{k}$ represents the number of $k$ length subsets for $A$, and $(2)^{n - k}$ represents the number of subsets that can constructed for $B$, given that it contains all $k$ elements of $A$. To get $\Pr(A  \subseteq B)$, we can divide this summation by $2^n \cdot 2^n$, which is the total possible subsets for $A$ and $B$.
+
+\noindent Doing this, we get a final expression of:
+
+$$\frac{1}{2^n \cdot 2^n}\sum_{k = 0}^{n} \binom{n}{k} \cdot (2)^{n - k}$$
+
+\noindent We can use the binomial theorem to express the summation as $3^n$, giving us a final expression of $\frac{3^n}{4^n} = \boxed{\left(\frac{3}{4} \right)^n}$
+
+\subsection{Problem 3c}
+
+$$\Pr(A \subseteq B | A \subseteq C) = \frac{\Pr(A \subseteq B \cap A \subseteq C)}{\Pr(A \subseteq C)}$$
+
+\noindent To find $\Pr(A \subseteq B \cap A \subseteq C)$, we can apply a similar process to the one in part b, this time with three subsets. Again, we construct the a summation:
+
+$$\frac{1}{2^n \cdot 2^n \cdot 2^n}\sum_{k = 0}^{n} \binom{n}{k} \cdot (2)^{n - k} \cdot (2)^{n - k}$$
+
+\noindent $\binom{n}{k}$ represents the number of $k$ length subsets for $A$, and $(2)^{n - k}$ represents the number of subsets that can constructed for $B$ and $C$, given that it contains all $k$ elements of $A$. To get $\Pr(A  \subseteq B)$, we can divide this summation by $2^n \cdot 2^n \cdot 2^n$, which is the total possible subsets that can be created for $A$, $B$, and $C$. This equals $\left(\frac{5}{8} \right)^n$. \noindent $\Pr(A \subseteq C) = \Pr(A \subseteq B) = \left(\frac{3}{4} \right)^n$.
+
+\noindent Putting this together, we obtain a final expression of $\boxed{\left(\frac{5}{6} \right)^n}$
+
+\subsection{Problem 3d}
+
+$X$ assumes a binomial distribution with $p = \frac{1}{2}$. We can think of this scenario as a series of repeated trials, where a successful event is defined as whether an element $i \in [n]$ is added to set $A$.
+
+\noindent $\EX(X) = n \cdot p = \boxed{\frac{n}{2}}$
+
+\noindent $\Var(X) = \EX(X^2) - (\EX(X))^2 = np(1 - p) = \frac{n}{2}\left(\frac{1}{2}\right) = \boxed{\frac{n}{4}}$
+
+\subsection{Problem 3e}
+
+$Y$ assumes a binomial distribution with $p = \frac{1}{4}$. We can think of this scenario as a series of repeated trials, where a successful event is defined as whether an element $i \in [n]$ is added to sets $A$ and $B$.
+
+\end{document}
