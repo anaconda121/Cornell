@@ -18,20 +18,28 @@
 
 \maketitle
 
+\begin{center}
+Collaborators: Timothy Li, Eric Zhou, Anthony Song
+\end{center}
+
 \section{Problem 1}
 
 \subsection{Problem 1a}
 
 $B_i$ assumes a geometric distribution with $p = \frac{i}{8}$.
 
-\noindent $\EX(B_i) = \frac{1}{p} = \frac{1}{\frac{i}{8}} = \frac{8}{i}$
+$$
+\EX(B_i) = \frac{1}{p} = \frac{1}{\frac{i}{8}} = \frac{8}{i}
+$$
 
-\noindent $\Var(B_i) = \frac{1 - p}{p^2} = \frac{1 - (\frac{i}{8})^2}{(\frac{i}{8})^2} = \frac{64 - 8i}{i^2}$
+$$
+\Var(B_i) = \frac{1 - p}{p^2} = \frac{1 - (\frac{i}{8})^2}{(\frac{i}{8})^2} = \frac{64 - 8i}{i^2}
+$$
 
 \subsection{Problem 1b}
 
 To envision this relationship, we can start with $B_8$, which represents the number of boxes that must be purchased before a ticket from one of the \textbf{8} particular colors is collected. 
-$B_7$ would then represent the number of boxes that need to be bought before a ticket that is one of the remaining seven colors is found. If we continue with this analogy, we can see each iteration of the summation will eliminate one of the possible colors that we are looking for, until we have eventually collected a ticket of every single color.
+$B_7$ would then represent the number of boxes that need to be bought before a ticket that is one of the remaining seven colors is found. If we continue with this analogy, we can see each iteration of the summation will yield us a ticket of one of the remaining colors that we are looking for, until we have eventually collected a ticket of every single color.
 
 \subsection{Problem 1c}
 
@@ -79,17 +87,35 @@ The correlation is positive, which makes sense--as the smaller value gets larger
 
 \subsection{Problem 3a}
 
-For events $A_1, ..., A_n$ to be mutually independent, $\Pr(A_1 \cap A_2 ... \cap A_n) = \Pr(A_1) \cdot \Pr(A_2) ... \cdot \Pr(A_n)$. $\Pr(A_1 \cap A_2 ... \cap A_n)$ means that every single element $i \in [n]$ would have to be an element of set A. The probability of this $(\frac{1}{2})^n$. 
+For events $A_1, ..., A_n$ to be mutually independent, we need to show
 
-\noindent We know that $\Pr(A_i) = \frac{|A|}{2^n}$, meaning that $\Pr(A_1) \cdot \Pr(A_2) ... \cdot \Pr(A_n) = \left(\frac{|A|}{2^n}\right)^n$. To calculate the cardinality of $A$, we can create a summation to solve for its expected value. For a subset of size $k$, there are $\binom{n}{k}$ different possible subsets, each with probability $\frac{k}{n}$ of being chosen. Therefore, we can set up the following summation: 
+$$
+\Pr \left(\bigcap_{i \in S} A_i \right) = \prod_{i \in S} \Pr(A_i)
+$$
 
-$$|A| = \sum_{k = 1}^{n} \binom{n}{k} \cdot \frac{k}{n} = \frac{1}{n} \sum_{k = 1}^{n} \binom{n}{k} \cdot k = \frac{1}{n} \sum_{k = 1}^{n} \frac{n!}{(k - 1)!(n - k)!} = \frac{1}{n} \sum_{k = 1}^{n} n \cdot \binom{n - 1}{k - 1} = \sum_{k = 1}^{n} \binom{n - 1}{k - 1}$$.
+\noindent where $S$ is an arbitrary subset of $[n]$ with $|S| = k$. The sample space is $|\mathcal{P}([n])| = 2^n$. We know $Pr(A_i) = \frac{1}{2}$ as there are two choices that have equal likelihood: either $i$ is in the subset or not. Therefore, $\prod_{i \in S} \Pr(A_i) = \left(\frac{1}{2} \right)^k$.
 
-\noindent We can reindex this summation to the following:
+$$
+\Pr \left(\bigcap_{i \in S}^{k} A_i \right) = \Pr(S \in A) = \sum_{j = 0}^{n} \Pr(|A| = j) \cdot \Pr(S \subseteq A \text{ given that } |A| = j)
+$$
 
-$$\sum_{k = 0}^{n - 1} \binom{n - 1}{k}  = 2^{n - 1}$$
+$$
+\Pr(|A| = j) = \frac{\binom{n}{j}}{2^n}
+$$
 
-\noindent Plugging this back into $\Pr(A_1) \cdot \Pr(A_2) ... \cdot \Pr(A_n)$. $\Pr(A_1 \cap A_2 ... \cap A_n)$, we get: $\left(\frac{2^{n-1}}{2^n}\right)^n = \left(\frac{1}{2}\right)^n$, which is the same expression we obtained for $\Pr(A_1 \cap A_2 ... \cap A_n)$. Therefore, we have shown events $A_1, ..., A_n$ are mutually independent.
+$$
+\Pr(S \subseteq A \text{ given that } |A| = j) = \frac{\Pr(S \subseteq A \cap |A| = j)}{\Pr(|A| = j)} = \frac{\binom{n - j}{m - j}}{\binom{n}{j}} 
+$$
+
+\noindent Note that the $2^n$ terms in the numerator and denominator will cancel out. 
+
+\noindent We can put this together to get:
+
+$$
+\frac{1}{2^n} \sum_{j = 0}^{k} \binom{n - j}{m - j} = \frac{1}{2^n} \sum_{j = 0}^{n - k} \binom{n - j}{m - j} = \frac{2^{n - k}}{2^n} = \left(\frac{1}{2} \right)^k
+$$
+
+\noindent Since we have shown  $\Pr \left(\bigcap_{i \in S} A_i \right) = \prod_{i \in S} \Pr(A_i)$ for an arbitrary subset, $A_1, ..., A_n$ events are mutually independent.
 
 \subsection{Problem 3b}
 
